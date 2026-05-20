@@ -2,6 +2,7 @@
   "id": "blinkybeacon",
   "name": "BlinkyBeacon - Farming Simulator Beacon",
   "version": "1.0.0",
+  "type": "connection",
   "manufacturer": "Community",
   "products": ["BlinkyBeacon USB"],
   "shortname": "BlinkyBeacon",
