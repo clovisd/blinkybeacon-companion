@@ -58,13 +58,13 @@ Feedbacks are updated every 2 seconds via polling `GET /status`.
 
 | Feedback | Condition | Default colour |
 |----------|-----------|----------------|
-| Tray online | HTTP server is reachable | Green |
+| Beacon connected | USB beacon is detected by the tray app | Green |
 | Beacon active | State is `spin` or `flash` | Amber |
 | Beacon spinning | State is `spin` | Green |
 | Beacon flashing | State is `flash` | Red |
 | Beacon idle | State is `idle` | Dark grey |
 
-**Tray online** turns on when `blinkybeacon-tray` is running and responding to HTTP requests, regardless of whether a physical beacon is connected. Use it to confirm the tray app is up before triggering beacon actions.
+**Beacon connected** turns on only when the physical USB beacon is detected and ready. It goes off if the beacon is unplugged, even if the tray app is still running.
 
 ---
 

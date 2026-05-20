@@ -3,8 +3,8 @@ import type { CompanionFeedbackDefinitions } from '@companion-module/base'
 
 export function getFeedbacks(self: { currentState: string; isOnline: boolean }): CompanionFeedbackDefinitions {
   return {
-    tray_online: {
-      name: 'Tray online (HTTP reachable)',
+    beacon_connected: {
+      name: 'Beacon connected (USB detected)',
       type: 'boolean',
       defaultStyle: {
         bgcolor: combineRgb(0, 180, 0),

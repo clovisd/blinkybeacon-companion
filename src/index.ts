@@ -61,7 +61,7 @@ class BlinkyBeaconInstance extends InstanceBase<BlinkyBeaconTypes> {
         return
       }
       const data = (await res.json()) as { state: string; connected: boolean }
-      this.isOnline = true
+      this.isOnline = data.connected
       this.currentState = data.state
       this.updateStatus(data.connected ? InstanceStatus.Ok : InstanceStatus.Connecting)
     } catch (_) {
