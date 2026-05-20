@@ -31,7 +31,7 @@ export function getFeedbacks(self: { currentState: string; isOnline: boolean }):
       name: 'Beacon spinning',
       type: 'boolean',
       defaultStyle: {
-        bgcolor: combineRgb(0, 200, 0),
+        bgcolor: combineRgb(255, 140, 0),
         color: combineRgb(0, 0, 0),
       },
       options: [],
@@ -43,7 +43,7 @@ export function getFeedbacks(self: { currentState: string; isOnline: boolean }):
       name: 'Beacon flashing',
       type: 'boolean',
       defaultStyle: {
-        bgcolor: combineRgb(220, 50, 50),
+        bgcolor: combineRgb(220, 30, 30),
         color: combineRgb(255, 255, 255),
       },
       options: [],
