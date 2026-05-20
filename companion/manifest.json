@@ -1,0 +1,12 @@
+{
+  "id": "blinkybeacon",
+  "name": "BlinkyBeacon - Farming Simulator Beacon",
+  "version": "1.0.0",
+  "manufacturer": "Community",
+  "products": ["BlinkyBeacon USB"],
+  "shortname": "BlinkyBeacon",
+  "description": "Control the Farming Simulator USB beacon light via the blinkybeacon-tray HTTP server.",
+  "license": "MIT",
+  "apiVersion": "0.6.0",
+  "main": "dist/index.js"
+}

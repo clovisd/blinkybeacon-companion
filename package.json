@@ -1,0 +1,20 @@
+{
+  "name": "companion-module-blinkybeacon",
+  "version": "1.0.0",
+  "description": "BitFocus Companion module for the BlinkyBeacon USB warning light",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@companion-module/base": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
+  }
+}
