@@ -2,3 +2,4 @@ node_modules/
 dist/
 final-build/
 *.tar.gz
+*.tgz
