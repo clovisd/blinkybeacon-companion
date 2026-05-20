@@ -1,10 +1,7 @@
 import { combineRgb } from '@companion-module/base'
-import type { CompanionFeedbackDefinitions, InstanceBase } from '@companion-module/base'
-import type { ModuleConfig } from './config'
+import type { CompanionFeedbackDefinitions } from '@companion-module/base'
 
-export function getFeedbacks(
-  self: InstanceBase<any> & { currentState: string }
-): CompanionFeedbackDefinitions {
+export function getFeedbacks(self: { currentState: string }): CompanionFeedbackDefinitions {
   return {
     beacon_active: {
       name: 'Beacon active (spin or flash)',

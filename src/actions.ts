@@ -1,9 +1,6 @@
-import type { CompanionActionDefinitions, InstanceBase } from '@companion-module/base'
-import type { ModuleConfig } from './config'
+import type { CompanionActionDefinitions } from '@companion-module/base'
 
-export function getActions(
-  self: InstanceBase<any> & { doPost: (path: string) => Promise<void> }
-): CompanionActionDefinitions {
+export function getActions(self: { doPost: (path: string) => Promise<void> }): CompanionActionDefinitions {
   return {
     spin: {
       name: 'Spin beacon',
