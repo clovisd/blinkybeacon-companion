@@ -1,20 +1,25 @@
 import {
   InstanceBase,
   InstanceStatus,
+  type InstanceTypes,
   type SomeCompanionConfigField,
 } from '@companion-module/base'
 import { type ModuleConfig, getConfigFields } from './config'
 import { getActions } from './actions'
 import { getFeedbacks } from './feedbacks'
 
-class BlinkyBeaconInstance extends InstanceBase {
+interface BlinkyBeaconTypes extends InstanceTypes {
+  config: ModuleConfig
+  secrets: undefined
+}
+
+class BlinkyBeaconInstance extends InstanceBase<BlinkyBeaconTypes> {
   currentState = 'idle'
   private pollInterval: ReturnType<typeof setInterval> | null = null
   private baseUrl = 'http://localhost:1337'
 
-  async init(config: unknown): Promise<void> {
-    const cfg = config as ModuleConfig
-    this.baseUrl = `http://${cfg.host}:${cfg.port}`
+  async init(config: BlinkyBeaconTypes['config'], _isFirstInit: boolean, _secrets: BlinkyBeaconTypes['secrets']): Promise<void> {
+    this.baseUrl = `http://${config.host}:${config.port}`
     this.setActionDefinitions(getActions(this))
     this.setFeedbackDefinitions(getFeedbacks(this))
     this.startPolling()
@@ -24,9 +29,8 @@ class BlinkyBeaconInstance extends InstanceBase {
     this.stopPolling()
   }
 
-  async configUpdated(config: unknown): Promise<void> {
-    const cfg = config as ModuleConfig
-    this.baseUrl = `http://${cfg.host}:${cfg.port}`
+  async configUpdated(config: BlinkyBeaconTypes['config'], _secrets: BlinkyBeaconTypes['secrets']): Promise<void> {
+    this.baseUrl = `http://${config.host}:${config.port}`
     this.startPolling()
   }
 
@@ -34,7 +38,6 @@ class BlinkyBeaconInstance extends InstanceBase {
     return getConfigFields()
   }
 
-  // Called by action handlers. Public to satisfy the { doPost } duck type.
   async doPost(path: string): Promise<void> {
     try {
       const res = await fetch(`${this.baseUrl}${path}`, { method: 'POST' })
@@ -60,7 +63,7 @@ class BlinkyBeaconInstance extends InstanceBase {
     } catch (_) {
       this.updateStatus(InstanceStatus.ConnectionFailure)
     }
-    this.checkFeedbacks('beacon_active', 'beacon_spinning', 'beacon_flashing', 'beacon_idle')
+    this.checkAllFeedbacks()
   }
 
   private startPolling(): void {

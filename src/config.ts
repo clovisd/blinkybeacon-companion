@@ -1,6 +1,6 @@
-import type { SomeCompanionConfigField } from '@companion-module/base'
+import type { JsonObject, SomeCompanionConfigField } from '@companion-module/base'
 
-export interface ModuleConfig {
+export interface ModuleConfig extends JsonObject {
   host: string
   port: number
 }
