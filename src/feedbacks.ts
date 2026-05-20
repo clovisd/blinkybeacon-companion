@@ -24,7 +24,7 @@ export function getFeedbacks(self: { currentState: string; isOnline: boolean }):
       },
       options: [],
       callback: () => {
-        return self.currentState === 'spin' || self.currentState === 'flash'
+        return self.isOnline && (self.currentState === 'spin' || self.currentState === 'flash')
       },
     },
     beacon_spinning: {
@@ -36,7 +36,7 @@ export function getFeedbacks(self: { currentState: string; isOnline: boolean }):
       },
       options: [],
       callback: () => {
-        return self.currentState === 'spin'
+        return self.isOnline && self.currentState === 'spin'
       },
     },
     beacon_flashing: {
@@ -48,7 +48,7 @@ export function getFeedbacks(self: { currentState: string; isOnline: boolean }):
       },
       options: [],
       callback: () => {
-        return self.currentState === 'flash'
+        return self.isOnline && self.currentState === 'flash'
       },
     },
     beacon_idle: {
@@ -60,7 +60,7 @@ export function getFeedbacks(self: { currentState: string; isOnline: boolean }):
       },
       options: [],
       callback: () => {
-        return self.currentState === 'idle'
+        return self.isOnline && self.currentState === 'idle'
       },
     },
   }
