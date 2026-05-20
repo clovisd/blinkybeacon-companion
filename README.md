@@ -8,7 +8,7 @@ This module communicates with [blinkybeacon-tray](https://github.com/clovisd/bli
 
 ## Prerequisites
 
-**[blinkybeacon-tray](https://github.com/clovisd/blinkybeacon-web) must be running on the same machine as Companion** (or reachable on the configured host/port).
+**[blinkybeacon-tray](https://github.com/clovisd/blinkybeacon-web) must be running** on the same machine as Companion, or on a reachable host if you configure a non-localhost address in the tray settings.
 
 ---
 
@@ -16,7 +16,7 @@ This module communicates with [blinkybeacon-tray](https://github.com/clovisd/bli
 
 ### Web UI (recommended)
 
-1. Download `companion-module-blinkybeacon-1.0.0.tgz` from [Releases](../../releases)
+1. Download `companion-module-blinkybeacon-1.1.0.tgz` from [Releases](../../releases)
 2. In Companion: **Settings → Modules → Import module** → select the `.tgz`
 3. Restart Companion if prompted
 
@@ -37,8 +37,8 @@ New-Item -ItemType Junction `
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| Host | `localhost` | Host where `blinkybeacon-tray` is running |
-| Port | `1337` | HTTP port (must match tray app `--port` setting) |
+| Host | `localhost` | Hostname or IP where `blinkybeacon-tray` is running |
+| Port | `1337` | HTTP port (must match the tray app's configured port) |
 
 ---
 
@@ -47,21 +47,24 @@ New-Item -ItemType Junction `
 | Action | Description |
 |--------|-------------|
 | Spin beacon | Starts the rotating amber light |
-| Flash beacon | Starts the flashing red light |
-| Stop beacon | Stops the beacon |
+| Flash beacon | Starts the flashing strobe light |
+| Stop beacon | Turns the beacon off |
 
 ---
 
 ## Feedbacks
 
+Feedbacks are updated every 2 seconds via polling `GET /status`.
+
 | Feedback | Condition | Default colour |
 |----------|-----------|----------------|
+| Tray online | HTTP server is reachable | Green |
 | Beacon active | State is `spin` or `flash` | Amber |
 | Beacon spinning | State is `spin` | Green |
 | Beacon flashing | State is `flash` | Red |
 | Beacon idle | State is `idle` | Dark grey |
 
-Feedbacks are updated every 2 seconds via polling `GET /status`.
+**Tray online** turns on when `blinkybeacon-tray` is running and responding to HTTP requests, regardless of whether a physical beacon is connected. Use it to confirm the tray app is up before triggering beacon actions.
 
 ---
 
@@ -69,8 +72,7 @@ Feedbacks are updated every 2 seconds via polling `GET /status`.
 
 ```bash
 npm install
-npm run build    # compiles TypeScript → dist/
-npm run bundle   # builds + packages → companion-module-blinkybeacon-1.0.0.tgz + final-build/
+npm run bundle   # type-checks, bundles with esbuild → .tgz + final-build/
 ```
 
 ---

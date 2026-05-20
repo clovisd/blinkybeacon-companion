@@ -15,6 +15,7 @@ interface BlinkyBeaconTypes extends InstanceTypes {
 
 class BlinkyBeaconInstance extends InstanceBase<BlinkyBeaconTypes> {
   currentState = 'idle'
+  isOnline = false
   private pollInterval: ReturnType<typeof setInterval> | null = null
   private baseUrl = 'http://localhost:1337'
 
@@ -54,13 +55,17 @@ class BlinkyBeaconInstance extends InstanceBase<BlinkyBeaconTypes> {
     try {
       const res = await fetch(`${this.baseUrl}/status`)
       if (!res.ok) {
+        this.isOnline = false
         this.updateStatus(InstanceStatus.UnknownError)
+        this.checkAllFeedbacks()
         return
       }
       const data = (await res.json()) as { state: string; connected: boolean }
+      this.isOnline = true
       this.currentState = data.state
       this.updateStatus(data.connected ? InstanceStatus.Ok : InstanceStatus.Connecting)
     } catch (_) {
+      this.isOnline = false
       this.updateStatus(InstanceStatus.ConnectionFailure)
     }
     this.checkAllFeedbacks()

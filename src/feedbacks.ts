@@ -1,8 +1,20 @@
 import { combineRgb } from '@companion-module/base'
 import type { CompanionFeedbackDefinitions } from '@companion-module/base'
 
-export function getFeedbacks(self: { currentState: string }): CompanionFeedbackDefinitions {
+export function getFeedbacks(self: { currentState: string; isOnline: boolean }): CompanionFeedbackDefinitions {
   return {
+    tray_online: {
+      name: 'Tray online (HTTP reachable)',
+      type: 'boolean',
+      defaultStyle: {
+        bgcolor: combineRgb(0, 180, 0),
+        color: combineRgb(255, 255, 255),
+      },
+      options: [],
+      callback: () => {
+        return self.isOnline
+      },
+    },
     beacon_active: {
       name: 'Beacon active (spin or flash)',
       type: 'boolean',
