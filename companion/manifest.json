@@ -1,13 +1,28 @@
 {
+  "$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+  "type": "connection",
   "id": "blinkybeacon",
   "name": "BlinkyBeacon - Farming Simulator Beacon",
-  "version": "1.0.0",
-  "type": "connection",
-  "manufacturer": "Community",
-  "products": ["BlinkyBeacon USB"],
   "shortname": "BlinkyBeacon",
   "description": "Control the Farming Simulator USB beacon light via the blinkybeacon-tray HTTP server.",
+  "version": "1.0.0",
   "license": "MIT",
-  "apiVersion": "0.6.0",
-  "main": "dist/index.js"
+  "repository": "https://github.com/clovisd/blinkybeacon-companion",
+  "bugs": "https://github.com/clovisd/blinkybeacon-companion/issues",
+  "maintainers": [
+    {
+      "name": "clovisd",
+      "github": "clovisd"
+    }
+  ],
+  "legacyIds": [],
+  "runtime": {
+    "type": "node22",
+    "api": "nodejs-ipc",
+    "apiVersion": "2.0.4",
+    "entrypoint": "../main.js"
+  },
+  "manufacturer": "Community",
+  "products": ["BlinkyBeacon USB"],
+  "keywords": ["blinkybeacon", "beacon", "farming-simulator", "usb"]
 }

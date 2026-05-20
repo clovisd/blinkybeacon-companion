@@ -80,4 +80,4 @@ class BlinkyBeaconInstance extends InstanceBase<BlinkyBeaconTypes> {
   }
 }
 
-export = BlinkyBeaconInstance
+export default BlinkyBeaconInstance
