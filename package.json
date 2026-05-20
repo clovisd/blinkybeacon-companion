@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "bundle": "bash scripts/bundle.sh"
   },
   "keywords": [],
   "author": "",
